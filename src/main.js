@@ -19,11 +19,13 @@ $(document).ready(function() {
         for(let i = 0; i < results.data.length; i++) {
           let docFirstName = results.data[i].profile.first_name;
           let docLastName = results.data[i].profile.last_name;
-          let streetAddress = results.data[i].practices[i].visit_address.street;
-          let docCity = results.data[i].practices[i].visit_address.city;
-          let zipcode = results.data[i].practices[i].visit_address.zip;
-          let phoneNumber = results.data[i].practices[i].phones[i].number;
-          $('#locationResults').append(`<div class="row"><div class="col-md-12"><h5>Doctor Name: ${docLastName}, ${docFirstName}</h5></div><br><div class="col-md-12">Address: <br>${streetAddress}, ${docCity}, ${zipcode}<br> Phone Number: <br>${phoneNumber} </div></div>`);
+          let streetAddress = results.data[i].practices[0].visit_address.street;
+          let docCity = results.data[i].practices[0].visit_address.city;
+          let zipcode = results.data[i].practices[0].visit_address.zip;
+          let phoneNumber = results.data[i].practices[0].phones[0].number[0];
+          let website = results.data[i].practices[0].phones[0].number[0];
+          let newPatients = results.data[i].practices[0].accepts_new_patients;
+          $('#locationResults').append(`<h5>Doctor Name: ${docLastName}, ${docFirstName}</h5>Address: <br>${streetAddress}, ${docCity}, ${zipcode}<br> Phone Number: <br>${phoneNumber} <br> Website: <br>${website} <br> Accepting New Patients: <br>${newPatients} `);
         }
       }
       }),function(statusText) {
