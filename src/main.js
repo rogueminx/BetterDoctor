@@ -12,10 +12,10 @@ $(document).ready(function() {
     let firstSearch = new Doctor();
     let promise = firstSearch.doctorByLocation(doctorName);
     promise.then(function(response) {
-      if (response.length == 0) {
-        $('#doctorNameResults').append(`There are no doctors in your area with that name.`)
-      } else {
       let results = JSON.parse(response);
+       if (results.data.length === 0) {
+          $('#doctorNameResults').append(`There are no doctors in your area with that name.`)
+        } else {
         for(let i = 0; i < results.data.length; i++) {
           let docFirstName = results.data[i].profile.first_name;
           let docLastName = results.data[i].profile.last_name;
@@ -39,10 +39,10 @@ $(document).ready(function() {
     let secondSearch = new Doctor();
     let secondpromise = secondSearch.doctorBySymptom(symptom);
     secondpromise.then(function(response) {
-      if (response.length == 0) {
+      let newresults = JSON.parse(response);
+      if (newresults.data.length === 0) {
         $('#symptomResults').append(`There are no doctors in your area that can help you with that particular problem.`)
       } else {
-      let newresults = JSON.parse(response);
         for(let i = 0; i < newresults.data.length; i++) {
           let docFirstName = newresults.data[i].profile.first_name;
           let docLastName = newresults.data[i].profile.last_name;
