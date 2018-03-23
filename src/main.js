@@ -14,10 +14,10 @@ $(document).ready(function() {
     promise.then(function(response) {
       let results = JSON.parse(response);
       for(let i = 0; i < results.data.length; i++) {
-        let docName = results.data[i].practices[i].name;
+        let docFirstName = results.data[i].profile.first_name;
         // let streetAddress = results.data[i].practices.visit_address.street;
         // let city = results.data[i].practices.visit_address.city;
-        $('#locationResults').append(`Doctor Name: ${docName}<p>`);
+        $('#locationResults').append(`Doctor Name: ${docFirstName}<p>`);
       }
     }), function(statusText) {
       $('#locationError').text(`There was an error processing your request: ${error.message}`);
