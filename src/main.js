@@ -6,14 +6,14 @@ import { Doctor } from './doctor-api.js';
 
 
 $(document).ready(function() {
-  $("#location-search").submit(function(event) {
+  $("#doctorName-search").submit(function(event) {
     event.preventDefault();
-    let city = $("#city").val();
+    let doctorName = $("#name").val();
     let firstSearch = new Doctor();
-    let promise = firstSearch.doctorByLocation(city);
+    let promise = firstSearch.doctorByLocation(doctorName);
     promise.then(function(response) {
       if (response.length == 0) {
-        $('#locationResults').append(`There are no doctors in your area. `)
+        $('#doctorNameResults').append(`There are no doctors in your area with that name.`)
       } else {
       let results = JSON.parse(response);
         for(let i = 0; i < results.data.length; i++) {
@@ -25,11 +25,11 @@ $(document).ready(function() {
           let phoneNumber = results.data[i].practices[0].phones[0].number;
           let website = results.data[i].practices[0].website || "no website";
           let newPatients = results.data[i].practices[0].accepts_new_patients;
-          $('#locationResults').append(`<h5>Doctor Name: ${docLastName}, ${docFirstName}</h5>Address: <br>${streetAddress}, ${docCity}, ${zipcode}<br> Phone Number: <br>${phoneNumber} <br> Website: <br>${website} <br> Accepting New Patients: <br>${newPatients} `);
+          $('#doctorNameResults').append(`<h5>Doctor Name: ${docLastName}, ${docFirstName}</h5>Address: <br>${streetAddress}, ${docCity}, ${zipcode}<br> Phone Number: <br>${phoneNumber} <br> Website: <br>${website} <br> Accepting New Patients: <br>${newPatients} `);
         }
       }
       }),function(statusText) {
-        $('#locationError').text(`There was an error processing your request: ${error.message}`);
+        $('#doctorNameError').text(`There was an error processing your request: ${error.message}`);
       };
   })
 });
