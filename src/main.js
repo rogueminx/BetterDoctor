@@ -22,8 +22,8 @@ $(document).ready(function() {
           let streetAddress = results.data[i].practices[0].visit_address.street;
           let docCity = results.data[i].practices[0].visit_address.city;
           let zipcode = results.data[i].practices[0].visit_address.zip;
-          let phoneNumber = results.data[i].practices[0].phones[0].number[0];
-          let website = results.data[i].practices[0].phones[0].number[0];
+          let phoneNumber = results.data[i].practices[0].phones[0].number;
+          let website = results.data[i].practices[0].website || "no website";
           let newPatients = results.data[i].practices[0].accepts_new_patients;
           $('#locationResults').append(`<h5>Doctor Name: ${docLastName}, ${docFirstName}</h5>Address: <br>${streetAddress}, ${docCity}, ${zipcode}<br> Phone Number: <br>${phoneNumber} <br> Website: <br>${website} <br> Accepting New Patients: <br>${newPatients} `);
         }
