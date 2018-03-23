@@ -1,4 +1,4 @@
-
+import $ from 'jquery';
 const apiKey = process.env.exports.apiKey
 
 export class Doctor {
@@ -13,6 +13,7 @@ export class Doctor {
           resolve(request.response);
         } else {
           reject(Error(request.statusText));
+          $('#doctorNameError').text(`There was an error processing your request: ${error.message}`);
         }
       }
       request.open("GET", url, true);
@@ -30,6 +31,7 @@ export class Doctor {
           resolve(request.response);
         } else {
           reject(Error(request.statusText));
+          $('#symptomError').text(`There was an error processing your request: ${request.statusText}`);
         }
       }
       request.open("GET", url, true);

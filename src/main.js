@@ -28,9 +28,7 @@ $(document).ready(function() {
           $('#doctorNameResults').append(`<h5>Doctor Name: ${docLastName}, ${docFirstName}</h5>Address: <br>${streetAddress}, ${docCity}, ${zipcode}<br> Phone Number: <br>${phoneNumber} <br> Website: <br>${website} <br> Accepting New Patients: <br>${newPatients} `);
         }
       }
-      }),function(statusText) {
-        $('#doctorNameError').text(`There was an error processing your request: ${error.message}`);
-      };
+    })
   })
 
   $("#doctorSymptom-search").submit(function(event) {
@@ -55,8 +53,6 @@ $(document).ready(function() {
           $('#symptomResults').append(`<h5>Doctor Name: ${docLastName}, ${docFirstName}</h5>Address: <br>${streetAddress}, ${docCity}, ${zipcode}<br> Phone Number: <br>${phoneNumber} <br> Website: <br>${website} <br> Accepting New Patients: <br>${newPatients} `);
         }
       }
-      }),function(statusText) {
-        $('#symptomError').text(`There was an error processing your request: ${error.message}`);
-      };
+    })
   })
 });
