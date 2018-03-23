@@ -19,25 +19,25 @@
             <h3 id="subheader">By Name</h3>
             <form id="doctorName-search">
               <label for="name">Find a doctor based on their name!</label>
-              <input id="name" type="text"><br>
+              <input id="name" type="text"><hr>
               <button class="btn btn-info" id="searchName">Search for Doctors!</button>
             </form>
+            <br>
+            <span id="doctorNameError"></span>
           </div>
           <div class="col-md-6">
             <h3 id="subheader">By Symptom</h3>
             <form id="doctorSymptom-search">
               <label for="symptom">Find a doctor based on your illness or problem area: (toothache)</label>
-              <input id="symptom" type="text"><br>
+              <input id="symptom" type="text"><hr>
               <button class="btn btn-info" id="searchSymptom">Search for Doctors!</button>
             </form>
+            <br>
+            <span id="symptomError"></span>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6" id="doctorNameResults">
-            <span id="doctorNameError"></span>
-          </div>
-          <div class="col-md-6" id="symptomResults">
-            <span id="symptomError"></span>
+          <div class="col-md-12" id="doctorResults">
           </div>
         </div>
       </table>

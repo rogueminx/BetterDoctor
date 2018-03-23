@@ -4,6 +4,21 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Doctor } from './doctor-api.js';
 
+function displayResults(allresults){
+  let results = allresults;
+  for(let i = 0; i < results.data.length; i++) {
+    let docFirstName = results.data[i].profile.first_name;
+    let docLastName = results.data[i].profile.last_name;
+    let streetAddress = results.data[i].practices[0].visit_address.street;
+    let docCity = results.data[i].practices[0].visit_address.city;
+    let zipcode = results.data[i].practices[0].visit_address.zip;
+    let phoneNumber = results.data[i].practices[0].phones[0].number;
+    let website = results.data[i].practices[0].website || "no website";
+    let newPatients = results.data[i].practices[0].accepts_new_patients;
+    $('#doctorResults').append(`<h5>Doctor Name: ${docLastName}, ${docFirstName}</h5>Address: <br>${streetAddress}, ${docCity}, ${zipcode}<br> Phone Number: <br>${phoneNumber} <br> Website: <br>${website} <br> Accepting New Patients: <br>${newPatients} `);
+  }
+}
+
 
 $(document).ready(function() {
   $("#doctorName-search").submit(function(event) {
@@ -14,19 +29,9 @@ $(document).ready(function() {
     promise.then(function(response) {
       let results = JSON.parse(response);
        if (results.data.length === 0) {
-          $('#doctorNameResults').append(`There are no doctors in your area with that name.`)
+          $('#doctorNameError').append(`There are no doctors in your area with that name.`)
         } else {
-        for(let i = 0; i < results.data.length; i++) {
-          let docFirstName = results.data[i].profile.first_name;
-          let docLastName = results.data[i].profile.last_name;
-          let streetAddress = results.data[i].practices[0].visit_address.street;
-          let docCity = results.data[i].practices[0].visit_address.city;
-          let zipcode = results.data[i].practices[0].visit_address.zip;
-          let phoneNumber = results.data[i].practices[0].phones[0].number;
-          let website = results.data[i].practices[0].website || "no website";
-          let newPatients = results.data[i].practices[0].accepts_new_patients;
-          $('#doctorNameResults').append(`<h5>Doctor Name: ${docLastName}, ${docFirstName}</h5>Address: <br>${streetAddress}, ${docCity}, ${zipcode}<br> Phone Number: <br>${phoneNumber} <br> Website: <br>${website} <br> Accepting New Patients: <br>${newPatients} `);
-        }
+        return displayResults(results);
       }
     })
   })
@@ -37,21 +42,11 @@ $(document).ready(function() {
     let secondSearch = new Doctor();
     let secondpromise = secondSearch.doctorBySymptom(symptom);
     secondpromise.then(function(response) {
-      let newresults = JSON.parse(response);
-      if (newresults.data.length === 0) {
-        $('#symptomResults').append(`There are no doctors in your area that can help you with that particular problem.`)
+      let results = JSON.parse(response);
+      if (results.data.length === 0) {
+        $('#symptomError').append(`There are no doctors in your area that can help you with that particular problem.`)
       } else {
-        for(let i = 0; i < newresults.data.length; i++) {
-          let docFirstName = newresults.data[i].profile.first_name;
-          let docLastName = newresults.data[i].profile.last_name;
-          let streetAddress = newresults.data[i].practices[0].visit_address.street;
-          let docCity = newresults.data[i].practices[0].visit_address.city;
-          let zipcode = newresults.data[i].practices[0].visit_address.zip;
-          let phoneNumber = newresults.data[i].practices[0].phones[0].number;
-          let website = newresults.data[i].practices[0].website || "no website";
-          let newPatients = newresults.data[i].practices[0].accepts_new_patients;
-          $('#symptomResults').append(`<h5>Doctor Name: ${docLastName}, ${docFirstName}</h5>Address: <br>${streetAddress}, ${docCity}, ${zipcode}<br> Phone Number: <br>${phoneNumber} <br> Website: <br>${website} <br> Accepting New Patients: <br>${newPatients} `);
-        }
+        return displayResults(results);
       }
     })
   })
