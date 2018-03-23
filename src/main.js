@@ -19,13 +19,14 @@ $(document).ready(function() {
         for(let i = 0; i < results.data.length; i++) {
           let docFirstName = results.data[i].profile.first_name;
           let docLastName = results.data[i].profile.last_name;
-          let streetAddress = (results.data[i].practices[i].visit_address.street === undefined) ? "none" : results.data[i].practices[i].visit_address.street;
+          let streetAddress = results.data[i].practices[i].visit_address.street;
           let docCity = results.data[i].practices[i].visit_address.city;
           let zipcode = results.data[i].practices[i].visit_address.zip;
-          $('#locationResults').append(`<div class="row"><div class="col-md-12"><h5>Doctor Name: ${docLastName}, ${docFirstName}</h5></div><div class="col-md-12">Address: <br>${streetAddress}, ${docCity}, ${zipcode} </div></div>`);
+          let phoneNumber = results.data[i].practices[i].phones[i].number;
+          $('#locationResults').append(`<div class="row"><div class="col-md-12"><h5>Doctor Name: ${docLastName}, ${docFirstName}</h5></div><br><div class="col-md-12">Address: <br>${streetAddress}, ${docCity}, ${zipcode}<br> Phone Number: <br>${phoneNumber} </div></div>`);
         }
       }
-      }), function(statusText) {
+      }),function(statusText) {
         $('#locationError').text(`There was an error processing your request: ${error.message}`);
       };
   })
