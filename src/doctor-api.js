@@ -1,5 +1,5 @@
 
-const apiKey = process.env.exports.apiKey;
+const apiKey = process.env.exports.apiKey
 
 export class Doctor {
 

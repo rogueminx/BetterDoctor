@@ -17,23 +17,25 @@
         <div class="row">
           <div class="col-md-6" id="location">
             <h3 id="subheader">By Location</h3>
-            <label for="location">Find a doctor based on your location! Please enter in this format (or-portland)</label>
-            <input id="location" type="text">
-            <button class="btn btn-info" id="searchLocation">Search for Doctors!</button>
+            <form id="location-search">
+              <label for="city">Find a doctor based on your location! Please enter in this format (or-portland)</label>
+              <input id="city" type="text"><br>
+              <button class="btn btn-info" id="searchLocation">Search for Doctors!</button>
+            </form>
           </div>
           <div class="col-md-6" id="symptom">
             <h3 id="subheader">By Symptom</h3>
             <label for="symptom">Find a doctor based on your illness or problem area: (toothache)</label>
-            <input id="symptom" type="text">
+            <input id="symptom" type="text"><br>
             <button class="btn btn-info" id="searchSymptom">Search for Doctors!</button>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6" id="locationResults">
-
+            <span id="locationError"></span>
           </div>
           <div class="col-md-6" id="symptomResults">
-
+            <span id="symptomError"></span>
           </div>
         </div>
       </table>

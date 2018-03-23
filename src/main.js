@@ -6,20 +6,21 @@ import { Doctor } from './doctor-api.js';
 
 
 $(document).ready(function() {
-  $('#searchLocation').click(function() {
+  $("#location-search").submit(function(event) {
     event.preventDefault();
-    const location = $('#location').val();
+    let city = $("#city").val();
     let firstSearch = new Doctor();
-    let promise = firstSearch.doctorByLocation(location);
+    let promise = firstSearch.doctorByLocation(city);
     promise.then(function(response) {
       let results = JSON.parse(response);
       for(let i = 0; i < results.data.length; i++) {
         let docName = results.data[i].practices.name;
-        let streetAddress = results.data[i].practices.visit_address.street;
-        let city = results.data[i].practices.visit_address.city;
-        
+        // let streetAddress = results.data[i].practices.visit_address.street;
+        // let city = results.data[i].practices.visit_address.city;
+        $('#locationResults').append(`DOCNAME ${docName}`);
       }
-      $('#locationResults').append(`<div class="row" id="resultrow"><div class="col-md-10"><span id="doctorDetails"> ${docName} </span></div></div>`);
-    })
+    }), function(statusText) {
+      $('#locationError').text(`There was an error processing your request: ${error.message}`);
+    };
   })
 });
